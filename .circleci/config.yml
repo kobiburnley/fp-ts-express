@@ -1,0 +1,14 @@
+version: 2.1
+jobs:
+  build-and-test:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test

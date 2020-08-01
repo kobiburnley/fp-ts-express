@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "composite": true
+  },
+  "references": [
+    {
+      "path": "../fp-ts-express/tsconfig.build.json"
+    }
+  ],
+  "include": ["src/**/*.ts*"]
+}

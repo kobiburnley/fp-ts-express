@@ -1,0 +1,19 @@
+{
+  "name": "fp-ts-express-example",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "start": "node lib/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fp-ts-express": "^1.0.0",
+    "io-ts-express": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.2.2",
+    "typescript": "^3.9.7"
+  }
+}

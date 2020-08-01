@@ -1,0 +1,16 @@
+{
+  "name": "fp-ts-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json"
+  },
+  "devDependencies": {
+		"jest": "^26.2.2",
+		"typescript": "^3.9.7"
+	},
+  "author": "",
+  "license": "ISC"
+}
