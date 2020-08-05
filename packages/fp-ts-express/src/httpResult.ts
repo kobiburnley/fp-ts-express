@@ -1,1 +1,1 @@
-export type HttpResult<A> = { status: number; value: A }
+export type HttpResult<A = unknown> = { status: number; value: A }

@@ -1,14 +1,26 @@
-import { RequestHandler as ExpressRequestHandler, Router } from "express"
+import { RequestHandler, Router } from "express"
 
-export type RequestHandler = (
+export type RequestHandlerFP = (
   path: string,
-  ...handlers: ExpressRequestHandler[]
+  ...handlers: RequestHandler[]
 ) => (router: Router) => void
 
-export const use: RequestHandler = (path, ...handlers) => (router: Router) => {
+export const use: RequestHandlerFP = (path, ...handlers) => (router: Router) => {
   router.use(path, handlers)
 }
 
-export const get: RequestHandler = (path, ...handlers) => (router: Router) => {
+export const get: RequestHandlerFP = (path, ...handlers) => (router: Router) => {
   router.get(path, handlers)
+}
+
+export const post: RequestHandlerFP = (path, ...handlers) => (router: Router) => {
+  router.post(path, handlers)
+}
+
+export const put: RequestHandlerFP = (path, ...handlers) => (router: Router) => {
+  router.put(path, handlers)
+}
+
+export const del: RequestHandlerFP = (path, ...handlers) => (router: Router) => {
+  router.delete(path, handlers)
 }

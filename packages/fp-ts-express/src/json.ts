@@ -1,19 +1,12 @@
-import { Response } from "express"
-import { fold } from "fp-ts/lib/Either"
-import { pipe } from "fp-ts/lib/function"
-import { TaskEither } from "fp-ts/lib/TaskEither"
 import { HttpResult } from "./httpResult"
+import { RequestContext } from "./requestContext"
 
-export const json = <A>(res: Response) => (a: A) => {
-  res.json(a)
-}
+export const json = (
+  child: (requestContext: RequestContext) => HttpResult | Promise<HttpResult>
+) => async (requestContext: RequestContext) => {
+  const { res } = requestContext
 
-export const taskJSON = <E, A>(res: Response) => async (taskEither: TaskEither<HttpResult<E>, A>) =>
-  pipe(
-    await taskEither(),
-    fold(({status, value}) => statusJSON(res)({ status, value }), json(res))
-  )
+  const { status, value } = await child(requestContext)
 
-export const statusJSON = <A>(res: Response) => ({ status, value }: HttpResult<A>) => {
   res.status(status).json(value)
 }

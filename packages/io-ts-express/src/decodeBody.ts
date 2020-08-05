@@ -1,10 +1,10 @@
-import { Request } from "express"
-import { Type, Validation } from "io-ts"
+import { RequestContext } from "fp-ts-express"
+import { Type } from "io-ts"
+import { decode } from './decode'
 
-export const decodeBodyBase = <T>(validation: (u: unknown) => Validation<T>) => (
-  req: Request
-) => {
-  return validation(req.body)
+export const decodeBody = <T, R>(
+  type: Type<T> | Type<T>["decode"],
+  child: (value: T) => (requestContext:  RequestContext) => R
+) => (requestContext: RequestContext) => {
+ return decode<T, R>(type, requestContext.req.body, child)(requestContext)
 }
-
-export const decodeBody = <T>(type: Type<T>) => decodeBodyBase(type.decode)
